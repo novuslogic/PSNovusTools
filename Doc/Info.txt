@@ -1,0 +1,20 @@
+
+$remoteServer = 10.0.0.24
+$remoteUser = ubuntu
+$remotePassword = password
+$localFilePath = D:\Projects\DevEnv\Ubuntu\scripts\upgrade.sh
+$remoteFilePath = /usr/local/bin/upgrade.sh
+
+Copy-SSHFile -remoteServer 10.0.0.24 -remoteUser ubuntu -remotePassword (Convert-StringToSecureString("password")) -localFilePath D:\Projects\DevEnv\Ubuntu\scripts\upgrade.sh -remoteFilePath /usr/local/bin/upgrade.sh
+
+
+BUild
+
+
+Remove-Module PSNovusTools
+import-Module "D:\Projects\PSNovusTools\PSNovusTools"
+
+
+NEw Function
+
+New-PSFunction -Name Convert-StringToSecureString -PesterTest    
