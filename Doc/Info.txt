@@ -1,15 +1,34 @@
 
-Test Copy-SSHFile
+Copy-SSHFile
 
 Copy-SSHFile -remoteServer 10.0.0.24 -remoteUser ubuntu -remotePassword (Convert-StringToSecureString("password")) -localFilePath D:\Projects\DevEnv\Ubuntu\scripts\upgrade.sh -remoteFilePath /usr/local/bin/upgrade.sh
 
 Build
 
-
 Remove-Module PSNovusTools
 import-Module "D:\Projects\PSNovusTools\PSNovusTools"
+
+
+
+
+PSScaffold Module
+
+https://www.powershellgallery.com/packages/PSScaffold/2.1.1
+
+
+Install-Module -Name PSScaffold
 
 
 New Function
 
 New-PSFunction -Name Convert-StringToSecureString -PesterTest    
+
+
+Test Modules
+
+Pester
+
+https://www.powershellgallery.com/packages/Pester/6.0.0-alpha4
+
+Install-Module -Name Pester -AllowPrerelease
+

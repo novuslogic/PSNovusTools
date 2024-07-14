@@ -47,12 +47,23 @@ $LocalFilename = Split-Path $localFilePath -Leaf
 
 $tmpSourcePath = "/tmp/{0}" -f $LocalFilename
 
+
+
 try {
 
   $credential = (New-Object System.Management.Automation.PSCredential($remoteUser,  $remotePassword ))
 
 } catch {
     Write-Error "Failed to create the credential. Error: $_"
+
+    return $false
+}
+
+try {
+  Get-SSHHostKey -ComputerName $remoteServer | New-SSHTrustedHost
+}
+catch {
+    Write-Error "New-SSHTrustedHost. Error: $_"
 
     return $false
 }
