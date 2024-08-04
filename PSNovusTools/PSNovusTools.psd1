@@ -27,10 +27,10 @@ Author = 'Adam Craig Johnston'
 CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) Adam Craig Johnston. All rights reserved.'
+Copyright = '(c) Novuslogic 2024. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'A Novus Tools set'
+Description = 'A '
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '5.1'
