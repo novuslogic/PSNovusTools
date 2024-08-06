@@ -24,7 +24,7 @@ GUID = '118ba154-6314-45a7-aab4-ef0d565d7ce2'
 Author = 'Adam Craig Johnston'
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+CompanyName = 'Novuslogic'
 
 # Copyright statement for this module
 Copyright = '(c) Novuslogic 2024. All rights reserved.'
