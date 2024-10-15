@@ -6,9 +6,20 @@ Copy-SSHFile -remoteServer 10.0.0.24 -remoteUser ubuntu -remotePassword (Convert
 Build/Test
 
 Remove-Module PSNovusTools
-import-Module "D:\Projects\PSNovusTools\PSNovusTools"
 
 
+
+
+$env:PSModulePath += ";D:\Projects\PSNovusTools"
+[Environment]::SetEnvironmentVariable("PSModulePath", $env:PSModulePath + ";D:\Projects\PSNovusTools", "User")
+
+
+
+
+
+Get-Module -ListAvailable
+
+Get-Command -Module PSNovusTools
 
 
 PSScaffold Module
