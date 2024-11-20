@@ -12,7 +12,7 @@
 RootModule = 'PSNovusTools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.2.0'
+ModuleVersion = '0.1.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@ CompanyName = 'Novuslogic'
 Copyright = '(c) Novuslogic 2024. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'A PowerShell module that provides DevOps tools'
+Description = 'A PowerShell module that delivers tools for DevOps operations.'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '5.1'
