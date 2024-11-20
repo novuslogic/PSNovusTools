@@ -2,15 +2,15 @@
 $module = Get-Module -Name PSNovusTools
 
 if (-not $module) {
-    Write-Host "PSNovusTools module is not installed. "
+    Write-Error "PSNovusTools module is not installed. "
    exit
 } 
 
-$remoteServer = "10.0.0.24"
-$remoteUser = "ubuntu"
-$remotePassword = Convert-StringToSecureString("password")
+$remoteServer = "10.0.0.21"
+$remoteUser = "Administrator"
+$remotePassword = Convert-StringToSecureString("w0rk1ngh@rd")
 $localFilePath = "D:\Projects\DevEnv\Ubuntu\scripts\upgrade.sh"
-$remoteFilePath = "/usr/local/bin/upgrade.sh"
+$remoteFilePath = "c:\temp"
 
 
 

@@ -20,17 +20,15 @@ function Copy-SSHFile {
     process {
         # Check if the script is running with administrative privileges
         if (-not (Get-IsAdministrator)) {
-            Write-Host "Please run this script as an administrator."
+            Write-Error "Please run this script as an administrator."
             return $false
         }
         
-        $plainTextPassword = Convert-SecureStringToString -SecureString $remotePassword
-        
-       
+$plainTextPassword = Convert-SecureStringToString -SecureString $remotePassword
 
 # Check if the local file exists
 if (-not (Test-Path -Path $localFilePath)) {
-    Write-Host "File $localFilePath does not exist."
+    Write-Error "File $localFilePath does not exist."
     return $false
 }
 
@@ -44,10 +42,6 @@ if (-not $module) {
 
 
 $LocalFilename = Split-Path $localFilePath -Leaf
-
-$tmpSourcePath = "/tmp/{0}" -f $LocalFilename
-
-
 
 try {
 
@@ -68,8 +62,82 @@ catch {
     return $false
 }
 
+# Create a new SSH session
+try{
+    $session = New-SSHSession -ComputerName $remoteServer -Credential $credential 
+  }
+  catch {
+      Write-Error "Failed to create SSH session. Error: $_"
+      return $false
+  }
+
+ # Determine the remote OS
+ Write-Host "Checking Remote OS detected ..."
+ try {
+    $osResult = Invoke-SSHCommand -SessionId $session.SessionId -Command 'uname -s'
+    if ($osResult.ExitStatus -eq 0) {
+        $remoteOS = 'Linux'
+        $remoteshell = 'bash'
+    } else {
+        # If 'uname -s' fails, try a Windows-specific command
+        $osResult = Invoke-SSHCommand -SessionId $session.SessionId -Command 'ver'
+        if ($osResult.ExitStatus -eq 0) {
+            $remoteOS = 'Windows'
+            $remoteshell = 'cmd'
+        } else {
+             # Check for Windows 
+            $osResult = Invoke-SSHCommand -SessionId $session.SessionId -Command '$PSVersionTable.OS'
+            if ($osResult.ExitStatus -eq 0) {
+               $remoteOS = 'Windows'
+               $remoteshell = 'powershell'
+           } else { 
+
+            Write-Error "Failed to determine the remote OS."
+            Remove-SSHSession -SessionId $session.SessionId
+            return $false
+           }
+        }
+    }
+} catch {
+    Write-Error "Error determining remote OS. Error: $_"
+    Remove-SSHSession -SessionId $session.SessionId
+    return $false
+}
+
+if ($remoteshell -eq "cmd") {
+    Write-Error "Remote shell 'cmd' not supported."
+    Remove-SSHSession -SessionId $session.SessionId
+    return $false
+
+}
+
+Write-Host "Remote OS detected: $remoteOS ($remoteshell)"
+
+
+switch ($remoteOS) {
+    "Windows" {
+        
+        $tmpRemotepath = (Invoke-SSHCommand -SessionId $session.SessionId -Command '$env:TEMP').Output.Trim()
+
+        $tmpSourcePath = (Add-TrailingBackslash($tmpRemotepath)) + $LocalFilename
+    }
+    "Linux" {
+        $tmpRemotepath = "/tmp"
+        $tmpSourcePath = "$tmpRemotepath/$LocalFilename"
+        
+    }
+    default {
+         Write-Error "Unsupported remote OS: $remoteOS"
+         Remove-SSHSession -SessionId $session.SessionId
+         return $false
+    }
+}
+
+
+
 try {
-   Set-SCPItem -ComputerName $remoteServer -Credential $credential -Path $localFilePath -Destination /tmp 
+   # Set-SCPItem -ComputerName $remoteServer -Credential $credential -Path $localFilePath -Destination /tmp 
+  Set-SCPItem -ComputerName $remoteServer -Credential $credential -Path $localFilePath -Destination $tmpRemotepath 
 }
 catch {
     Write-Error "Failed to copy file. Error: $_"
@@ -77,20 +145,22 @@ catch {
     return $false
 }
 
-# Create a new SSH session
-try{
-  $session = New-SSHSession -ComputerName $remoteServer -Credential $credential 
-}
-catch {
-    Write-Error "Failed to create SSH session. Error: $_"
-    return $false
-}
 
+switch ($remoteOS) {
+    "Windows" {
+        
+        $command = "Move-Item -Path '$tmpSourcePath' -Destination '$remoteFilePath' -Force"
 
-# Construct the sudo command with the -S option
-$command = @"
-echo '$plainTextPassword' | sudo -S mv $tmpSourcePath  $remoteFilePath
-"@
+    }
+    "Linux" {
+       # Construct the sudo command with the -S option
+      $command = "echo '$plainTextPassword' | sudo -S mv '$tmpSourcePath' '$remoteFilePath'"
+
+    }
+    default {
+        throw "Unsupported remote OS: $remoteOS"
+    }
+}
 
 
 

@@ -43,3 +43,7 @@ https://www.powershellgallery.com/packages/Pester/6.0.0-alpha4
 
 Install-Module -Name Pester -AllowPrerelease
 
+
+
+https://www.powershellgallery.com/packages/PSNovusTools/0.1.0
+
