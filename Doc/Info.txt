@@ -29,6 +29,10 @@ https://www.powershellgallery.com/packages/PSScaffold/2.1.1
 
 Install-Module -Name PSScaffold
 
+https://github.com/RedeployAB/PSScaffold
+
+
+
 
 New Function
 
@@ -43,7 +47,12 @@ https://www.powershellgallery.com/packages/Pester/6.0.0-alpha4
 
 Install-Module -Name Pester -AllowPrerelease
 
+Publishing to powershellgallery.com
+
+https://learn.microsoft.com/en-us/powershell/gallery/concepts/publishing-guidelines?view=powershellget-3.x
 
 
 https://www.powershellgallery.com/packages/PSNovusTools/0.1.0
+
+
 
