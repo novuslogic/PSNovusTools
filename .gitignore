@@ -5,3 +5,4 @@ artifacts
 artifacts/*
 PSTestReport
 PSTestReport/*
+Publish.ps1
