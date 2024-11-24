@@ -1,26 +1,39 @@
 <#
 .SYNOPSIS
+    Copies a file from the local system to a remote server using SSH.
+
 .DESCRIPTION
+    This function transfers a file to a remote server and places it in the specified location.
+    It supports both Linux and Windows servers and dynamically adjusts commands based on the remote OS.
 #>
+
 function Copy-SSHFile {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the remote server hostname or IP.")]
+        [ValidateNotNullOrEmpty()]
         [string]$remoteServer,
-        [Parameter(Mandatory=$true)]
+
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the remote username.")]
+        [ValidateNotNullOrEmpty()]
         [string]$remoteUser,
-        [Parameter(Mandatory=$true)]
+
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the remote user's password.")]
         [SecureString]$remotePassword,
-        [Parameter(Mandatory=$true)]
+
+        [Parameter(Mandatory = $true, HelpMessage = "Path to the local file to copy.")]
+        [ValidateNotNullOrEmpty()]
         [string]$localFilePath,
-        [Parameter(Mandatory=$true)]
-        [string]$remoteFilePath 
+
+        [Parameter(Mandatory = $true, HelpMessage = "Path to the remote destination file.")]
+        [ValidateNotNullOrEmpty()]
+        [string]$remoteFilePath
     )
 
     process {
         # Check if the script is running with administrative privileges
         if (-not (Get-IsAdministrator)) {
-            Write-Error "Please run this script as an administrator."
+            Write-Error "Please run as administrator."
             return $false
         }
         
@@ -54,7 +67,7 @@ try {
 }
 
 try {
-  Get-SSHHostKey -ComputerName $remoteServer | New-SSHTrustedHost
+    $hostKey = Get-SSHHostKey -ComputerName $remoteServer | New-SSHTrustedHost
 }
 catch {
     Write-Error "New-SSHTrustedHost. Error: $_"
@@ -72,7 +85,7 @@ try{
   }
 
  # Determine the remote OS
- Write-Host "Checking Remote OS detected ..."
+ 
  try {
     $osResult = Invoke-SSHCommand -SessionId $session.SessionId -Command 'uname -s'
     if ($osResult.ExitStatus -eq 0) {
@@ -93,26 +106,23 @@ try{
            } else { 
 
             Write-Error "Failed to determine the remote OS."
-            Remove-SSHSession -SessionId $session.SessionId
+            Close-SSHSession($session)
+
             return $false
            }
         }
     }
 } catch {
     Write-Error "Error determining remote OS. Error: $_"
-    Remove-SSHSession -SessionId $session.SessionId
+    Close-SSHSession($session)
     return $false
 }
 
 if ($remoteshell -eq "cmd") {
     Write-Error "Remote shell 'cmd' not supported."
-    Remove-SSHSession -SessionId $session.SessionId
+    Close-SSHSession($session)
     return $false
-
 }
-
-Write-Host "Remote OS detected: $remoteOS ($remoteshell)"
-
 
 switch ($remoteOS) {
     "Windows" {
@@ -128,7 +138,7 @@ switch ($remoteOS) {
     }
     default {
          Write-Error "Unsupported remote OS: $remoteOS"
-         Remove-SSHSession -SessionId $session.SessionId
+         Close-SSHSession($session)
          return $false
     }
 }
@@ -136,11 +146,12 @@ switch ($remoteOS) {
 
 
 try {
-   # Set-SCPItem -ComputerName $remoteServer -Credential $credential -Path $localFilePath -Destination /tmp 
   Set-SCPItem -ComputerName $remoteServer -Credential $credential -Path $localFilePath -Destination $tmpRemotepath 
 }
 catch {
     Write-Error "Failed to copy file. Error: $_"
+
+    Close-SSHSession($session)
 
     return $false
 }
@@ -162,8 +173,6 @@ switch ($remoteOS) {
     }
 }
 
-
-
 # Execute the command to move the file
 try{
   $result = Invoke-SSHCommand -SessionId $session.SessionId -Command $command  
@@ -171,13 +180,13 @@ try{
 catch {
     Write-Error "Failed SSH command. Error: $_"
 
-    Remove-SSHSession -SessionId $session.SessionId
+    Close-SSHSession($session)
 
     return $false
 }
 
 # Close the SSH session
-Remove-SSHSession -SessionId $session.SessionId
+Close-SSHSession($session)
 
 if ($result.ExitStatus -ne 0) {
     Write-Error "Error: Command failed with exit code $($result.ExitStatus)"
