@@ -55,4 +55,7 @@ https://learn.microsoft.com/en-us/powershell/gallery/concepts/publishing-guideli
 https://www.powershellgallery.com/packages/PSNovusTools/0.1.0
 
 
+Update-Module -Name PSNovusTools
+
+
 

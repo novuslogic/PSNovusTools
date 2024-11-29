@@ -85,7 +85,7 @@ try{
   }
 
  # Determine the remote OS
- 
+ <#
  try {
     $osResult = Invoke-SSHCommand -SessionId $session.SessionId -Command 'uname -s'
     if ($osResult.ExitStatus -eq 0) {
@@ -106,7 +106,7 @@ try{
            } else { 
 
             Write-Error "Failed to determine the remote OS."
-            Close-SSHSession($session)
+            $sshresult = Close-SSHSession($session)
 
             return $false
            }
@@ -114,17 +114,24 @@ try{
     }
 } catch {
     Write-Error "Error determining remote OS. Error: $_"
-    Close-SSHSession($session)
+    $sshresult = Close-SSHSession($session)
     return $false
 }
+#>
 
-if ($remoteshell -eq "cmd") {
+$SSHRemoteOS = Get-SSHRemoteOS([SSH.SshSession]$session)
+
+if ($SSHRemoteOS.$result -eq $false) {   
+   return $false
+}
+
+if ($SSHRemoteOS.$remoteshell -eq "cmd") {
     Write-Error "Remote shell 'cmd' not supported."
-    Close-SSHSession($session)
+    $sshresult = Close-SSHSession($session)
     return $false
 }
 
-switch ($remoteOS) {
+switch ($SSHRemoteOS.$remoteOS) {
     "Windows" {
         
         $tmpRemotepath = (Invoke-SSHCommand -SessionId $session.SessionId -Command '$env:TEMP').Output.Trim()
@@ -138,7 +145,7 @@ switch ($remoteOS) {
     }
     default {
          Write-Error "Unsupported remote OS: $remoteOS"
-         Close-SSHSession($session)
+         $sshresult = Close-SSHSession($session)
          return $false
     }
 }
@@ -151,7 +158,7 @@ try {
 catch {
     Write-Error "Failed to copy file. Error: $_"
 
-    Close-SSHSession($session)
+    $sshresult = Close-SSHSession($session)
 
     return $false
 }
@@ -180,13 +187,13 @@ try{
 catch {
     Write-Error "Failed SSH command. Error: $_"
 
-    Close-SSHSession($session)
+    $sshresult = Close-SSHSession($session)
 
     return $false
 }
 
 # Close the SSH session
-Close-SSHSession($session)
+$sshresult = Close-SSHSession($session)
 
 if ($result.ExitStatus -ne 0) {
     Write-Error "Error: Command failed with exit code $($result.ExitStatus)"

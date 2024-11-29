@@ -51,7 +51,8 @@ function Copy-SSHFolder {
         # Create credentials
         try {
             $credential = New-Object System.Management.Automation.PSCredential($remoteUser, $remotePassword)
-        } catch {
+        }
+        catch {
             Write-Error "Failed to create credentials. Error: $_"
             return $false
         }
@@ -59,33 +60,39 @@ function Copy-SSHFolder {
         # Establish SSH session
         try {
             $session = New-SSHSession -ComputerName $remoteServer -Credential $credential
-        } catch {
+        }
+        catch {
             Write-Error "Failed to establish SSH session. Error: $_"
             return $false
         }
 
         # Determine remote OS
-        try {
-            $osCheck = Invoke-SSHCommand -SessionId $session.SessionId -Command 'uname -s' -ErrorAction Stop
-            $remoteOS = if ($osCheck.ExitStatus -eq 0) { "Linux" } else { "Windows" }
-        } catch {
-            Write-Error "Unable to determine remote OS. Error: $_"
-            Close-SSHSession $session
+        $SSHRemoteOS = Get-SSHRemoteOS([SSH.SshSession]$session)
+
+        if ($SSHRemoteOS.result -eq $false) {   
+            return $false
+        }
+
+        if ($SSHRemoteOS.remoteshell -eq "cmd") {
+            Write-Error "Remote shell 'cmd' not supported."
+            $sshresult = Close-SSHSession($session)
             return $false
         }
 
         # Ensure the destination folder exists on the remote system
-        $createFolderCommand = if ($remoteOS -eq "Linux") {
+        $createFolderCommand = if ($SSHRemoteOS.remoteOS -eq "Linux") {
             "mkdir -p '$remoteFolderPath'"
-        } else {
+        }
+        else {
             "if (-not (Test-Path '$remoteFolderPath')) { New-Item -ItemType Directory -Path '$remoteFolderPath' }"
         }
 
         try {
-            Invoke-SSHCommand -SessionId $session.SessionId -Command $createFolderCommand
-        } catch {
+            $sshresult = Invoke-SSHCommand -SessionId $session.SessionId -Command $createFolderCommand
+        }
+        catch {
             Write-Error "Failed to create remote folder. Error: $_"
-            Close-SSHSession $session
+            $sshresult = Close-SSHSession $session
             return $false
         }
 
@@ -104,25 +111,29 @@ function Copy-SSHFolder {
                 $createDirCommand = if ($remoteOS -eq "Linux") {
                     $remoteDir = (Split-Path -Path $remoteFilePath).Replace("\", "/")
                     "mkdir -p '$remoteDir'"
-                } else {
+                }
+                else {
                     $remoteDir = (Split-Path -Path $remoteFilePath)
                     "if (-not (Test-Path '$remoteDir')) { New-Item -ItemType Directory -Path '$remoteDir' }"
                 }
 
-                Invoke-SSHCommand -SessionId $session.SessionId -Command $createDirCommand
+                $sshresult = Invoke-SSHCommand -SessionId $session.SessionId -Command $createDirCommand
+
+                Write-Verbose "Copy from $file.FullName to $remoteDir"
+             
 
                 # Transfer the file
-                #Set-SCPItem -SessionId $session.SessionId -Path  -Destination 
-                Set-SCPItem -ComputerName $remoteServer -Credential $credential -Path $file.FullName -Destination $remoteDir
+                $sshresult = Set-SCPItem -ComputerName $remoteServer -Credential $credential -Path $file.FullName -Destination $remoteDir
             }
-        } catch {
+        }
+        catch {
             Write-Error "Failed to copy folder contents. Error: $_"
-            Close-SSHSession $session
+            $sshresult = Close-SSHSession $session
             return $false
         }
 
         # Close SSH session
-        Close-SSHSession $session
+        $sshresult = Close-SSHSession $session
         #Write-Host "Folder copied successfully to $remoteFolderPath"
         return $true
     }
