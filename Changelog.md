@@ -12,6 +12,7 @@
 
 ## Release v0.1.3
 
+* Add Github CodeSpaces support
 * New private function Get-SSHRemoteOS 
 * Added Verbose to function Copy-SSHFolder
 * Updated function Test-Windows2022Or11OrHigher with correct Verbose switch
