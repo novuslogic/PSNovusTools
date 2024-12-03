@@ -15,10 +15,6 @@ $env:PSModulePath += ";D:\Projects\PSNovusTools"
 
 
 
-
-
-Get-Module -ListAvailable
-
 Get-Command -Module PSNovusTools
 
 
@@ -37,6 +33,8 @@ https://github.com/RedeployAB/PSScaffold
 New Function
 
 New-PSFunction -Name Convert-StringToSecureString -PesterTest    
+
+* Run this from the root folder
 
 
 Test Modules

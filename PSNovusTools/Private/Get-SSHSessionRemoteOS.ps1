@@ -1,4 +1,3 @@
-# Define a custom class
 class SSHRemoteOS {
     [string]$remoteOS
     [string]$remoteshell   
@@ -12,7 +11,7 @@ class SSHRemoteOS {
 }
 
 
-function Get-SSHRemoteOS([SSH.SshSession]$session) {
+function Get-SSHSessionRemoteOS([SSH.SshSession]$session) {
 
     try {
         # Attempt to determine the remote OS using SSH commands

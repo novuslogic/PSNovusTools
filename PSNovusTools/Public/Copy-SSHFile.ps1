@@ -84,42 +84,7 @@ try{
       return $false
   }
 
- # Determine the remote OS
- <#
- try {
-    $osResult = Invoke-SSHCommand -SessionId $session.SessionId -Command 'uname -s'
-    if ($osResult.ExitStatus -eq 0) {
-        $remoteOS = 'Linux'
-        $remoteshell = 'bash'
-    } else {
-        # If 'uname -s' fails, try a Windows-specific command
-        $osResult = Invoke-SSHCommand -SessionId $session.SessionId -Command 'ver'
-        if ($osResult.ExitStatus -eq 0) {
-            $remoteOS = 'Windows'
-            $remoteshell = 'cmd'
-        } else {
-             # Check for Windows 
-            $osResult = Invoke-SSHCommand -SessionId $session.SessionId -Command '$PSVersionTable.OS'
-            if ($osResult.ExitStatus -eq 0) {
-               $remoteOS = 'Windows'
-               $remoteshell = 'powershell'
-           } else { 
-
-            Write-Error "Failed to determine the remote OS."
-            $sshresult = Close-SSHSession($session)
-
-            return $false
-           }
-        }
-    }
-} catch {
-    Write-Error "Error determining remote OS. Error: $_"
-    $sshresult = Close-SSHSession($session)
-    return $false
-}
-#>
-
-$SSHRemoteOS = Get-SSHRemoteOS([SSH.SshSession]$session)
+$SSHRemoteOS = Get-SSHSessionRemoteOS([SSH.SshSession]$session)
 
 if ($SSHRemoteOS.$result -eq $false) {   
    return $false

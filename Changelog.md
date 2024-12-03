@@ -12,6 +12,12 @@
 
 ## Release v0.1.3
 
+* New Public function Invoke-SSHPowrshellCommand **
+* New Public function Invoke-SSHCommand **
+* New private fnction Invoke-SSHSessionCommand **
+* New private function Get-SSHSessionWindowsService
+* Rename private Get-SSHRemoteOS to Get-SSHSessionRemoteOS
+* New public function Start-SSHWindowsService,Stop-SSHWindowsService and Get-SSHWindowsService
 * Add Github CodeSpaces support
 * New private function Get-SSHRemoteOS 
 * Added Verbose to function Copy-SSHFolder

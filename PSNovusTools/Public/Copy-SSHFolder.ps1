@@ -67,7 +67,7 @@ function Copy-SSHFolder {
         }
 
         # Determine remote OS
-        $SSHRemoteOS = Get-SSHRemoteOS([SSH.SshSession]$session)
+        $SSHRemoteOS = Get-SSHSessionRemoteOS([SSH.SshSession]$session)
 
         if ($SSHRemoteOS.result -eq $false) {   
             return $false
