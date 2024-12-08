@@ -12,9 +12,10 @@
 
 ## Release v0.1.3
 
-* New Public function Invoke-SSHPowrshellCommand **
-* New Public function Invoke-SSHCommand **
-* New private fnction Invoke-SSHSessionCommand **
+* New private function Stop-SSHSessionWindowsService
+* New public function Stop-SSHWindowsService
+* New private function Start-SSHSessionWindowsService
+* New public function Start-SSHWindowsService
 * New private function Get-SSHSessionWindowsService
 * Rename private Get-SSHRemoteOS to Get-SSHSessionRemoteOS
 * New public function Start-SSHWindowsService,Stop-SSHWindowsService and Get-SSHWindowsService

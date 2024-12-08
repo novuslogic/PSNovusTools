@@ -31,6 +31,12 @@ function Get-SSHWindowsService {
 
     process {
 
+        # Check if the script is running with administrative privileges
+        if (-not (Get-IsAdministrator)) {
+            Write-Error "Please run as administrator."
+            return $false
+        }
+
   
         try {
 
