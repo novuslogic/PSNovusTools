@@ -12,7 +12,7 @@
 RootModule = 'PSNovusTools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.3'
+ModuleVersion = '0.1.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@ CompanyName = 'Novuslogic'
 Copyright = '(c) Novuslogic 2024. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'A PowerShell module that delivers tools for DevOps operations.'
+Description = 'A PowerShell module providing tools for deployment tasks and operations.'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '5.1'
@@ -98,10 +98,10 @@ PrivateData = @{
         # Tags = @()
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        # LicenseUri = 'http://www.apache.org/licenses/'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        # ProjectUri = 'https://github.com/novuslogic/PSNovusTools'
 
         # A URL to an icon representing this module.
         # IconUri = ''

@@ -10,6 +10,7 @@
 
 ## <a name=intro>Introduction</a>
 
+A PowerShell module providing tools for deployment tasks and operations.
 
 ## <a name=install>Installation</a>
 
@@ -26,3 +27,6 @@
 
 
 ## <a name=version>Versions and Updates</a>
+
+Changelog
+

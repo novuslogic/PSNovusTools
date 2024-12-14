@@ -3,12 +3,14 @@
 <!-- TOC -->
 
 - [Changelog](#changelog)
+    - [Release v0.1.4](#release-v014)
     - [Release v0.1.3](#release-v013)
     - [Release v0.1.2](#release-v012)
     - [Release v0.1.1](#release-v011)
     - [Release v0.1.0](#release-v010)
 
 <!-- /TOC -->
+
 ## Release v0.1.4
 
 * New private Invoke-SSHSessionItem
