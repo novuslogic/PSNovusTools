@@ -9,6 +9,10 @@
     - [Release v0.1.0](#release-v010)
 
 <!-- /TOC -->
+## Release v0.1.4
+
+* New private Invoke-SSHSessionItem
+* New public Invoke-SSHItem
 
 ## Release v0.1.3
 
