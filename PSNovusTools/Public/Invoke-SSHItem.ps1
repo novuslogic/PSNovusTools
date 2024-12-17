@@ -36,7 +36,7 @@ function Invoke-SSHItem {
     
             if (-not $credential) {
                 
-                return $nill
+                return $null
             }
 
             # Check if Posh-SSH is installed
@@ -55,7 +55,7 @@ function Invoke-SSHItem {
             }
             catch {
                 Write-Error "Failed to create SSH session. Error: $_"
-                return [SSSHWindowsService]::new(0, "", "", $false)
+                return $null
             }
            $sshresult = Invoke-SSHSessionItem -session $session -sshCommand $sshCommand
 

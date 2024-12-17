@@ -1,6 +1,6 @@
 function Invoke-SSHSessionItem([SSH.SshSession]$session, [string]$sshCommand) {
 
-    $sshResult = $null
+    $sshresult = $null
 
     try {
        

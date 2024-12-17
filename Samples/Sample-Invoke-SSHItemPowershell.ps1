@@ -8,11 +8,10 @@ $remoteUser = "Administrator"
 $remotePassword = Convert-StringToSecureString("w0rk1ngh@rd")
 
 
-$sshCommand = @"
-powershell -Command "Write-Output 'Hello World'"
-"@
+$sshPowershellCommand = "Write-Output 'Hello World'"
 
-$sshresult = Invoke-SSHItem -remoteServer $remoteServer -remoteUser $remoteUser -remotePassword $remotePassword -sshCommand $sshCommand
+
+$sshresult = Invoke-SSHItemPowershell -remoteServer $remoteServer -remoteUser $remoteUser -remotePassword $remotePassword -sshPowershellCommand $sshPowershellCommand
 
 
 Write-Output $sshresult.Output

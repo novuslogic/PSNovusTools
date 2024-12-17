@@ -32,7 +32,10 @@ https://github.com/RedeployAB/PSScaffold
 
 New Function
 
-New-PSFunction -Name Convert-StringToSecureString -PesterTest    
+New-PSFunction -Name Invoke-SSHItemBash -PesterTest    
+
+
+
 
 * Run this from the root folder
 

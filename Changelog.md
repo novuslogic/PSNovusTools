@@ -11,10 +11,17 @@
 
 <!-- /TOC -->
 
+## Release v0.1.5
+
+* New private function Invoke-SSHSessionItemBash
+* New public function Invoke-SSHItemBash
+* New private function Invoke-SSHSessionItemPowershell
+* New public function Invoke-SSHItemPowershell
+
 ## Release v0.1.4
 
-* New private Invoke-SSHSessionItem
-* New public Invoke-SSHItem
+* New private function Invoke-SSHSessionItem
+* New public function Invoke-SSHItem
 
 ## Release v0.1.3
 
