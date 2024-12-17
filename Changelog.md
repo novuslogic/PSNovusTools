@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [Changelog](#changelog)
+    - [Release v0.1.5](#release-v015)
     - [Release v0.1.4](#release-v014)
     - [Release v0.1.3](#release-v013)
     - [Release v0.1.2](#release-v012)
@@ -20,7 +21,17 @@
 
 ## Release v0.1.4
 
-* New private function Invoke-SSHSessionItem
+<!-- TOC -->
+
+- [Changelog](#changelog)
+    - [Release v0.1.5](#release-v015)
+    - [Release v0.1.4](#release-v014)
+    - [Release v0.1.3](#release-v013)
+    - [Release v0.1.2](#release-v012)
+    - [Release v0.1.1](#release-v011)
+    - [Release v0.1.0](#release-v010)
+
+<!-- /TOC -->* New private function Invoke-SSHSessionItem
 * New public function Invoke-SSHItem
 
 ## Release v0.1.3
