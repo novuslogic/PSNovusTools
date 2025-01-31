@@ -1,0 +1,5 @@
+# Base image with PowerShell
+FROM mcr.microsoft.com/devcontainers/powershell:latest
+
+# Add any additional tools or dependencies here
+RUN pwsh -Command "Install-Module -Name Pester -Force -Scope CurrentUser"
