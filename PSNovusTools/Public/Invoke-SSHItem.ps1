@@ -41,7 +41,6 @@ function Invoke-SSHItem {
 
             # Check if Posh-SSH is installed
             $module = Get-Module -Name Posh-SSH -ListAvailable
-
             if (-not $module) {
                 Write-Host "Posh-SSH module is not installed. Installing now..."
                 Install-Module -Name Posh-SSH -Force

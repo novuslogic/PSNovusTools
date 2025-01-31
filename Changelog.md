@@ -12,6 +12,10 @@
 
 <!-- /TOC -->
 
+## Release v0.1.6
+
+* New public function Install-Winget
+
 ## Release v0.1.5
 
 * New private function Invoke-SSHSessionItemBash

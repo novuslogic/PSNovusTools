@@ -32,7 +32,7 @@ https://github.com/RedeployAB/PSScaffold
 
 New Function
 
-New-PSFunction -Name Invoke-SSHItemBash -PesterTest    
+New-PSFunction -Name Install-Winget -PesterTest    
 
 
 
