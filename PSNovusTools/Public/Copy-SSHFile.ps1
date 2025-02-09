@@ -129,7 +129,7 @@ catch {
 }
 
 
-switch ($remoteOS) {
+switch ($SSHRemoteOS.remoteOS) {
     "Windows" {
         
         $command = "Move-Item -Path '$tmpSourcePath' -Destination '$remoteFilePath' -Force"
