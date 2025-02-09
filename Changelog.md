@@ -14,6 +14,12 @@
 
 <!-- /TOC -->
 
+## Release v0.1.7.1
+
+* Small fixed Copy-SSHFile with RemoteOS variable incorrectly passing variable
+
+
+
 ## Release v0.1.7
 
 * Fixed Copy-SSHFile with RemoteOS variable incorrectly passing variable

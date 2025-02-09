@@ -108,7 +108,7 @@ function Copy-SSHFolder {
                 $remoteFilePath = (Join-Path -Path $remoteFolderPath -ChildPath $relativePath)
 
                 # Create remote directory if it doesn't exist
-                $createDirCommand = if ($remoteOS -eq "Linux") {
+                $createDirCommand = if ($SSHRemoteOS.remoteOS -eq "Linux") {
                     $remoteDir = (Split-Path -Path $remoteFilePath).Replace("\", "/")
                     "mkdir -p '$remoteDir'"
                 }
