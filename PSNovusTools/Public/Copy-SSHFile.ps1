@@ -86,17 +86,17 @@ try{
 
 $SSHRemoteOS = Get-SSHSessionRemoteOS([SSH.SshSession]$session)
 
-if ($SSHRemoteOS.$result -eq $false) {   
+if ($SSHRemoteOS.result -eq $false) {   
    return $false
 }
 
-if ($SSHRemoteOS.$remoteshell -eq "cmd") {
+if ($SSHRemoteOS.remoteshell -eq "cmd") {
     Write-Error "Remote shell 'cmd' not supported."
     $sshresult = Close-SSHSession($session)
     return $false
 }
 
-switch ($SSHRemoteOS.$remoteOS) {
+switch ($SSHRemoteOS.remoteOS) {
     "Windows" {
         
         $tmpRemotepath = (Invoke-SSHCommand -SessionId $session.SessionId -Command '$env:TEMP').Output.Trim()
@@ -109,7 +109,7 @@ switch ($SSHRemoteOS.$remoteOS) {
         
     }
     default {
-         Write-Error "Unsupported remote OS: $remoteOS"
+         Write-Error "Unsupported remote OS: $SSHRemoteOS.remoteOS"
          $sshresult = Close-SSHSession($session)
          return $false
     }

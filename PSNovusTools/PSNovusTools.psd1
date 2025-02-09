@@ -12,7 +12,7 @@
 RootModule = 'PSNovusTools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.6'
+ModuleVersion = '0.1.7'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -27,7 +27,7 @@ Author = 'Adam Craig Johnston'
 CompanyName = 'Novuslogic'
 
 # Copyright statement for this module
-Copyright = '(c) Novuslogic 2024. All rights reserved.'
+Copyright = '(c) Novuslogic 2025. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'A PowerShell module providing tools for deployment tasks and operations.'

@@ -3,6 +3,8 @@
 <!-- TOC -->
 
 - [Changelog](#changelog)
+    - [Release v0.1.7](#release-v017)
+    - [Release v0.1.6](#release-v016)
     - [Release v0.1.5](#release-v015)
     - [Release v0.1.4](#release-v014)
     - [Release v0.1.3](#release-v013)
@@ -11,6 +13,10 @@
     - [Release v0.1.0](#release-v010)
 
 <!-- /TOC -->
+
+## Release v0.1.7
+
+* Fixed Copy-SSHFile with RemoteOS variable incorrectly passing variable
 
 ## Release v0.1.6
 
