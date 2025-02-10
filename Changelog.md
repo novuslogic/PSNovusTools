@@ -14,6 +14,10 @@
 
 <!-- /TOC -->
 
+## Release v0.1.7.2
+
+* Fixed $RemoteOS variable issue in Copy-SSHFile in $SSHRemoteOS.remoteshell
+
 ## Release v0.1.7.1
 
 * Small fixed Copy-SSHFile with RemoteOS variable incorrectly passing variable
