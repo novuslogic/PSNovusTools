@@ -67,17 +67,17 @@ function Start-SSHWindowsService {
 
             $SSHRemoteOS = Get-SSHSessionRemoteOS($session)
 
-            if ($SSHRemoteOS.$result -eq $false) {   
+            if ($SSHRemoteOS.result -eq $false) {   
                 return [SSSHWindowsService]::new(0, "", "", $false)
             }
 
-            if ($SSHRemoteOS.$remoteOS -eq "Linux") {
+            if ($SSHRemoteOS.remoteOS -eq "Linux") {
                 Write-Error "Remote Linux OS not supported."
                 $sshresult = Close-SSHSession($session)
                 return [SSSHWindowsService]::new(0, "", "", $false)
             }
 
-            if ($SSHRemoteOS.$remoteshell -eq "cmd") {
+            if ($SSHRemoteOS.remoteshell -eq "cmd") {
                 Write-Error "Remote shell 'cmd' not supported."
                 $sshresult = Close-SSHSession($session)
                 return [SSSHWindowsService]::new(0, "", "", $false)

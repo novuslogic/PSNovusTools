@@ -19,7 +19,7 @@ powershell -Command "Start-Service -Name '$remoteServiceName'; Get-Service -Name
         $name = $serviceInfo.Name
         if($status -eq 4) {
 
-            $result = true
+            $result = $true
         }
     }
     catch {

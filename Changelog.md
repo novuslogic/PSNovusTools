@@ -3,6 +3,9 @@
 <!-- TOC -->
 
 - [Changelog](#changelog)
+    - [Release v0.1.7.3](#release-v0173)
+    - [Release v0.1.7.2](#release-v0172)
+    - [Release v0.1.7.1](#release-v0171)
     - [Release v0.1.7](#release-v017)
     - [Release v0.1.6](#release-v016)
     - [Release v0.1.5](#release-v015)
@@ -13,6 +16,10 @@
     - [Release v0.1.0](#release-v010)
 
 <!-- /TOC -->
+
+## Release v0.1.7.3
+
+* Fixed reference Start-SSHWindowsService and Start-SSHSessionWindowsService on $SSHRemoteOS variable
 
 ## Release v0.1.7.2
 

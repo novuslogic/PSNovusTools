@@ -12,7 +12,7 @@
 RootModule = 'PSNovusTools.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.7.2'
+ModuleVersion = '0.1.7.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
