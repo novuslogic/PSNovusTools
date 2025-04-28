@@ -6,3 +6,4 @@ artifacts/*
 PSTestReport
 PSTestReport/*
 Publish.ps1
+debug.log

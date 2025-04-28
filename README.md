@@ -1,22 +1,14 @@
 # PSNovusTools
 
-**Content**
+<!-- TOC -->
 
-* [Introduction](#intro)
-* [Installation](#install)
-* [Functions](#functions)
-* [Usage Examples](#usage)
-* [Versions and Updates](#version)
+- [PSNovusTools](#psnovustools)
+        - [Public functions](#public-functions)
+        - [Private functions](#private-functions)
+    - [<a name=usage>Usage Examples</a>](#a-nameusageusage-examplesa)
+    - [<a name=version>Versions and Updates</a>](#a-nameversionversions-and-updatesa)
 
-## <a name=intro>Introduction</a>
-
-A PowerShell module providing tools for deployment tasks and operations.
-
-## <a name=install>Installation</a>
-
-
-## <a name="functions">Functions</a>
-
+<!-- /TOC -->
 ### Public functions
 
 
@@ -28,5 +20,5 @@ A PowerShell module providing tools for deployment tasks and operations.
 
 ## <a name=version>Versions and Updates</a>
 
-Changelog
+[Changelog](https://github.com/novuslogic/PSNovusTools/blob/main/Changelog.md)
 
