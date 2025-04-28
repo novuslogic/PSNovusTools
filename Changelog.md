@@ -3,6 +3,7 @@
 <!-- TOC -->
 
 - [Changelog](#changelog)
+    - [Release v0.1.8](#release-v018)
     - [Release v0.1.7.3](#release-v0173)
     - [Release v0.1.7.2](#release-v0172)
     - [Release v0.1.7.1](#release-v0171)
@@ -16,6 +17,11 @@
     - [Release v0.1.0](#release-v010)
 
 <!-- /TOC -->
+
+## Release v0.1.8
+
+* New public function Set-IISWebConfigSecurity
+* New public function Import-PowerShellScript 
 
 ## Release v0.1.7.3
 
@@ -46,17 +52,7 @@
 
 ## Release v0.1.4
 
-<!-- TOC -->
-
-- [Changelog](#changelog)
-    - [Release v0.1.5](#release-v015)
-    - [Release v0.1.4](#release-v014)
-    - [Release v0.1.3](#release-v013)
-    - [Release v0.1.2](#release-v012)
-    - [Release v0.1.1](#release-v011)
-    - [Release v0.1.0](#release-v010)
-
-<!-- /TOC -->* New private function Invoke-SSHSessionItem
+* New private function Invoke-SSHSessionItem
 * New public function Invoke-SSHItem
 
 ## Release v0.1.3
@@ -85,19 +81,7 @@
 * Updated Copy-SSHFile for Windows
 * Added Add-TrailingBackslash 
 
-
 ## Release v0.1.0
-
-5/8/2024
 
 * First published to powershellgallery.com
 
-<!-- TOC -->
-
-- [Changelog](#changelog)
-    - [Release v0.1.3](#release-v013)
-    - [Release v0.1.2](#release-v012)
-    - [Release v0.1.1](#release-v011)
-    - [Release v0.1.0](#release-v010)
-
-<!-- /TOC -->

@@ -122,7 +122,7 @@ function Copy-SSHFolder {
                 Write-Verbose "Copy from $file.FullName to $remoteDir"
              
 
-                # Transfer the file
+                # Transfer the file 
                 $sshresult = Set-SCPItem -ComputerName $remoteServer -Credential $credential -Path $file.FullName -Destination $remoteDir
             }
         }
