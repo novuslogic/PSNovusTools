@@ -28,9 +28,8 @@ function Set-SSHIISWebConfigSecurity {
         [string]$FilePath,
  
         [Parameter(Mandatory = $true, HelpMessage = "Specify the IIS AppPool identity (e.g., 'IIS APPPOOL\\MyAppPool') to grant read access.")]
-        [string]$AppPoolUser,
+        [string]$AppPoolUser
 
-        [switch]$Verbose
     )
 
     process {
@@ -66,7 +65,7 @@ if (-not (Get-Command Set-IISWebConfigSecurity -ErrorAction SilentlyContinue)) {
 Set-IISWebConfigSecurity -FilePath '$FilePath' -AppPoolUser '$AppPoolUser'
 "@
 
-            if ($Verbose) { Write-Host "Running remote PowerShell:`n$psCmd" }
+           
 
             $result = Invoke-SSHCommand -SessionId $session.SessionId -Command "powershell -NoProfile -Command `$ErrorActionPreference = 'Stop'; $psCmd"
 

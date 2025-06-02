@@ -15,6 +15,10 @@
 
 <!-- /TOC -->
 
+## Release v0.1.9.1
+
+* Removed Verbose switch from Set-IISWebConfigSecurity
+
 ## Release v0.1.9
 
 * Copy-SSHFile - Upgrade the Posh-SSH module by installing it for the current user. 
