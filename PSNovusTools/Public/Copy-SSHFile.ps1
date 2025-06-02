@@ -18,8 +18,13 @@ function Copy-SSHFile {
         [ValidateNotNullOrEmpty()]
         [string]$remoteUser,
 
-        [Parameter(Mandatory = $true, HelpMessage = "Enter the remote user's password.")]
+        [Parameter(Mandatory = $false, HelpMessage = "Enter the remote user's password.")]
         [SecureString]$remotePassword,
+
+        
+        [Parameter(Mandatory = $false, HelpMessage = "Enter the specifies a key file path.")]
+        [SecureString]$KeyFilePath,
+
 
         [Parameter(Mandatory = $true, HelpMessage = "Path to the local file to copy.")]
         [ValidateNotNullOrEmpty()]
@@ -36,6 +41,19 @@ function Copy-SSHFile {
             Write-Error "Please run as administrator."
             return $false
         }
+
+        if ([string]::IsNullOrWhiteSpace($KeyFilePath) -and [string]::IsNullOrWhiteSpace($remotePassword)) {
+            Write-Error "Error: Both KeyFilePath and remotePassword are missing. Provide at least one authentication method."
+            return $false
+       
+        }
+        
+        if ([string]::IsNullOrWhiteSpace($KeyFilePath) -and -not [string]::IsNullOrWhiteSpace($remotePassword)) {
+            Write-Verbose "Using password-based authentication."
+        }
+        elseif (-not [string]::IsNullOrWhiteSpace($KeyFilePath)) {
+            Write-Verbose "Using key-based authentication: $KeyFilePath"
+        }
         
 $plainTextPassword = Convert-SecureStringToString -SecureString $remotePassword
 
@@ -49,10 +67,16 @@ if (-not (Test-Path -Path $localFilePath)) {
 $module = Get-Module -Name Posh-SSH -ListAvailable
 
 if (-not $module) {
-    Write-Host "Posh-SSH module is not installed. Installing now..."
-    Install-Module -Name Posh-SSH -Force
+    
+    try {
+        Write-Host "Posh-SSH module is not installed. Installing now..."
+        Install-Module -Name Posh-SSH -Scope CurrentUser -Force -ErrorAction Stop 
+    } catch {
+        Write-Error "Failed to install Posh-SSH: $_"
+        
+        return $false
+    }
 } 
-
 
 $LocalFilename = Split-Path $localFilePath -Leaf
 
@@ -77,6 +101,8 @@ catch {
 
 # Create a new SSH session
 try{
+    if (-KeyFile $keyFile)
+
     $session = New-SSHSession -ComputerName $remoteServer -Credential $credential 
   }
   catch {

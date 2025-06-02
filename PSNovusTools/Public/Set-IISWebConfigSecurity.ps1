@@ -10,10 +10,10 @@ It removes any existing access rules for the AppPool user and optional hardens b
 function Set-IISWebConfigSecurity {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory = $true, HelpMessage = "Enter the path to the web.config file to secure.")]
         [string]$FilePath,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory = $true, HelpMessage = "Specify the IIS AppPool identity (e.g., 'IIS APPPOOL\\MyAppPool') to grant read access.")]
         [string]$AppPoolUser
     )
 

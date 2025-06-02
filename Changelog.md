@@ -3,12 +3,9 @@
 <!-- TOC -->
 
 - [Changelog](#changelog)
+    - [Release v0.1.9](#release-v019)
     - [Release v0.1.8](#release-v018)
     - [Release v0.1.7.3](#release-v0173)
-    - [Release v0.1.7.2](#release-v0172)
-    - [Release v0.1.7.1](#release-v0171)
-    - [Release v0.1.7](#release-v017)
-    - [Release v0.1.6](#release-v016)
     - [Release v0.1.5](#release-v015)
     - [Release v0.1.4](#release-v014)
     - [Release v0.1.3](#release-v013)
@@ -18,6 +15,12 @@
 
 <!-- /TOC -->
 
+## Release v0.1.9
+
+* Copy-SSHFile - Upgrade the Posh-SSH module by installing it for the current user. 
+* New public function Set-IISWebConfigSecurity
+* New public function Get-VSPackage
+
 ## Release v0.1.8
 
 * New public function Set-IISWebConfigSecurity
@@ -25,23 +28,6 @@
 
 ## Release v0.1.7.3
 
-* Fixed reference Start-SSHWindowsService and Start-SSHSessionWindowsService on $SSHRemoteOS variable
-
-## Release v0.1.7.2
-
-* Fixed $RemoteOS variable issue in Copy-SSHFile in $SSHRemoteOS.remoteshell
-
-## Release v0.1.7.1
-
-* Small fixed Copy-SSHFile with RemoteOS variable incorrectly passing variable
-
-## Release v0.1.7
-
-* Fixed Copy-SSHFile with RemoteOS variable incorrectly passing variable
-
-## Release v0.1.6
-
-* New public function Install-Winget
 
 ## Release v0.1.5
 

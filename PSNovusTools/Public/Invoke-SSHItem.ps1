@@ -28,7 +28,7 @@ function Invoke-SSHItem {
         # Check if the script is running with administrative privileges
         if (-not (Get-IsAdministrator)) {
             Write-Error "Please run as administrator."
-            return $nill
+            return $null
         }
 
         try {
