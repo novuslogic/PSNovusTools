@@ -15,6 +15,10 @@
 
 <!-- /TOC -->
 
+## Release v0.1.9.2
+
+* Fixed Copy-SSHFile.
+
 ## Release v0.1.9.1
 
 * Removed Verbose switch from Set-IISWebConfigSecurity

@@ -100,8 +100,8 @@ catch {
 }
 
 # Create a new SSH session
-try{
-    if (-KeyFile $keyFile)
+try
+    {
 
     $session = New-SSHSession -ComputerName $remoteServer -Credential $credential 
   }
